@@ -81,7 +81,7 @@ class MessageWidget {
   createWidgetContent() {
     this.widgetContainer.innerHTML = `
         <header class="widget__header">
-            <h3>Start a conversation</h3>
+            <h3>Start THE conversation</h3>
             <p>We usually respond within a few hours</p>
         </header>
 
@@ -92,7 +92,7 @@ class MessageWidget {
                 type="text"
                 id="name"
                 name="name"
-                placeholder="Enter your name"
+                placeholder="Enter THE name"
                 />
             </div>
 
@@ -102,7 +102,7 @@ class MessageWidget {
                 type="email"
                 id="email"
                 name="email"
-                placeholder="Enter your email"
+                placeholder="Enter THE email"
                 />
             </div>
 
@@ -121,7 +121,7 @@ class MessageWidget {
                 <textarea
                 id="message"
                 name="message"
-                placeholder="Enter your message"
+                placeholder="Enter THE message"
                 rows="6"
                 ></textarea>
             </div>
