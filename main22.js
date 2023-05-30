@@ -11,11 +11,18 @@ function sendMessage() {
 }
 
 // Function to receive and process data from the page
-function setDataFromPage(data) {
+// function setDataFromPage(data) {
+//   // Process the data as needed
+//   console.log('Received data from page:', data);
+//   console.log("id:", data.id);
+// }
+
+// Function to receive and process data from the page
+window.setDataFromPage = function(data) {
   // Process the data as needed
   console.log('Received data from page:', data);
   console.log("id:", data.id);
-}
+};
 
 document.addEventListener("DOMContentLoaded", () => {
   listenForMessageSend();
