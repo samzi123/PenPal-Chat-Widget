@@ -1,4 +1,4 @@
-import { CLOSE_ICON, MESSAGE_ICON, TICK_ICON, style } from "./assets4.js";
+import { CLOSE_ICON, MESSAGE_ICON, TICK_ICON, style } from "./assets5.js";
 
 let loadInterval;
 
@@ -101,6 +101,13 @@ class MessageWidget {
     this.open = false;
     this.initialize();
     this.injectStyles();
+  }
+
+  setData(data){
+    console.log("got request to set the data");
+    console.log("data:", data);
+    this.data = data;
+    console.log("id:", this.data.id);
   }
 
   position = "";
