@@ -1,4 +1,80 @@
-import { CLOSE_ICON, MESSAGE_ICON, styles } from "./assets.js";
+import { CLOSE_ICON, MESSAGE_ICON, TICK_ICON, style } from "./assets4.js";
+
+let loadInterval;
+
+function sendMessage() {
+  const inputField = document.getElementById("input");
+  const input = inputField.value.trim();
+  input != "" && output(input);
+  inputField.value = "";
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  // listen for enter key press on input field
+  const inputField = document.getElementById("input");
+  inputField.addEventListener("keydown", function (e) {
+    if (e.code === "Enter") {
+      sendMessage();
+    }
+  });
+
+  // listen for send button click
+  const sendButton = document.getElementById("send-button");
+  sendButton.addEventListener("click", function (e) {
+    sendMessage();
+  });
+});
+
+function output(input) {
+  let product;
+
+  //product = "botRepl dsf dfsiojdfij dsofij sdf sdf ds df dsf dsf dsf dsf ds fds fd sf dsf fds g fsg fsg fsd gds f dsgjd";
+  product = "Hi";
+  addChat(input, product);
+
+  // generate bot response here
+
+}
+
+// returns a new chat message, either from bot or user
+const addChatMessage = (isBot, msg, uniqueId) => {
+  const mainDiv = document.getElementById("message-section");
+  let messageDiv = document.createElement("div");
+
+  const botOrUser = isBot ? "bot" : "user";
+
+  messageDiv.id = uniqueId;
+  messageDiv.classList.add("message");
+  messageDiv.classList.add(botOrUser);
+  messageDiv.innerHTML = `<span id="${botOrUser}-response">${msg}</span>`;
+  mainDiv.appendChild(messageDiv);
+
+  return messageDiv;
+};
+
+async function addChat(input, product) {
+  addChatMessage(false, input, generateUniqueID());
+
+  let botDiv = addChatMessage(true, "", generateUniqueID());
+  loader(botDiv);
+
+  // remove "..." after loading message from bot
+  clearInterval(loadInterval);
+  botDiv.innerHTML = `<span id="bot-response">${product}</span>`;
+
+  //mainDiv.appendChild(botDiv);
+  var scroll = document.getElementById("message-section");
+  scroll.scrollTop = scroll.scrollHeight;
+}
+
+// generates a unique id for each bot message to be able to select it while loading
+const generateUniqueID = () => {
+  const timestamp = new Date().getTime();
+  const random = Math.floor(Math.random() * 1000000000);
+
+  // combine both to generate unique id
+  return `id-${timestamp}-${random}`;
+};
 
 // to show "..." while loading message from bot
 const loader = (element) => {
@@ -93,80 +169,26 @@ class MessageWidget {
 
   createWidgetContent() {
     this.widgetContainer.innerHTML = `
-    <div class="card">
+      <div class="card">
         <div id="header">
             <h1>Chatbot</h1>
         </div>
-            <div id="message-section">
-                <div class="message bot" id="bot"><span id="bot-response">Hello.. I'm listening! Go on..</span></div>
-            </div>
-            <div id="input-section">
-                <input id="input" type="text" placeholder="Type a message" autocomplete="off" autofocus="autofocus"/>
-            <button class="send" onclick="sendMessage()">
-                <div class="circle"><i class="zmdi zmdi-mail-send"></i></div>
-            </button>
+        <div id="message-section">
+          <div class="message bot" id="bot"><span id="bot-response">Hello. I am listening! Go on..</span></div>
+        </div>
+        <div id="input-section">
+          <input id="input" type="text" placeholder="Type a message" autocomplete="off" autofocus="autofocus"/>
+          <button class="send" id="send-button">
+            ${TICK_ICON}
+          </button>
         </div>
     </div>
-`;
-
-
-
-
-
-    //     <header class="widget__header">
-    //         <h3>Start THE conversation</h3>
-    //         <p>We usually respond within a few hours</p>
-    //     </header>
-
-    //     <form>
-    //         <div class="form__field">
-    //             <label for="name">Name</label>
-    //             <input
-    //             type="text"
-    //             id="name"
-    //             name="name"
-    //             placeholder="Enter THE name"
-    //             />
-    //         </div>
-
-    //         <div class="form__field">
-    //             <label for="email">Email</label>
-    //             <input
-    //             type="email"
-    //             id="email"
-    //             name="email"
-    //             placeholder="Enter THE email"
-    //             />
-    //         </div>
-
-    //         <div class="form__field">
-    //             <label for="subject">Subject</label>
-    //             <input
-    //             type="text"
-    //             id="subject"
-    //             name="subject"
-    //             placeholder="Enter Message Subject"
-    //             />
-    //         </div>
-
-    //         <div class="form__field">
-    //             <label for="message">Message</label>
-    //             <textarea
-    //             id="message"
-    //             name="message"
-    //             placeholder="Enter THE message"
-    //             rows="6"
-    //             ></textarea>
-    //         </div>
-
-    //         <button>Send Message</button>
-    //     </form>
-    // `;
+    `;
   }
 
   injectStyles() {
     const styleTag = document.createElement("style");
-    styleTag.innerHTML = styles.replace(/^\s+|\n/gm, "");
+    styleTag.innerHTML = style;
 
     document.head.appendChild(styleTag);
   }

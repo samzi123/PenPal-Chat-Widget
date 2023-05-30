@@ -93,72 +93,17 @@ class MessageWidget {
 
   createWidgetContent() {
     this.widgetContainer.innerHTML = `
-
     <header>
-    <img src="./assets/header.svg" alt="ask me anything">
-    <h2>Hi! I am <span>ChatterBot</span>.</h2>
-  </header>
-  <section id="chat-container"></section>
+      <img src="./assets/header.svg" alt="ask me anything">
+      <h2>Hi! I am <span>ChatterBot</span>.</h2>
+    </header>
+    <section id="chat-container"></section>
 
-  <form>
-    <textarea name="prompt" placeholder="Ask me anything..." cols="1" rows="1"></textarea>
-    <button type="submit"><img src="./assets/send.svg" alt="send"></button>
-  </form>
-`;
-
-
-
-
-
-    //     <header class="widget__header">
-    //         <h3>Start THE conversation</h3>
-    //         <p>We usually respond within a few hours</p>
-    //     </header>
-
-    //     <form>
-    //         <div class="form__field">
-    //             <label for="name">Name</label>
-    //             <input
-    //             type="text"
-    //             id="name"
-    //             name="name"
-    //             placeholder="Enter THE name"
-    //             />
-    //         </div>
-
-    //         <div class="form__field">
-    //             <label for="email">Email</label>
-    //             <input
-    //             type="email"
-    //             id="email"
-    //             name="email"
-    //             placeholder="Enter THE email"
-    //             />
-    //         </div>
-
-    //         <div class="form__field">
-    //             <label for="subject">Subject</label>
-    //             <input
-    //             type="text"
-    //             id="subject"
-    //             name="subject"
-    //             placeholder="Enter Message Subject"
-    //             />
-    //         </div>
-
-    //         <div class="form__field">
-    //             <label for="message">Message</label>
-    //             <textarea
-    //             id="message"
-    //             name="message"
-    //             placeholder="Enter THE message"
-    //             rows="6"
-    //             ></textarea>
-    //         </div>
-
-    //         <button>Send Message</button>
-    //     </form>
-    // `;
+    <form>
+      <textarea name="prompt" placeholder="Ask me anything..." cols="1" rows="1"></textarea>
+      <button type="submit"><img src="./assets/send.svg" alt="send"></button>
+    </form>
+  `;
   }
 
   injectStyles() {
