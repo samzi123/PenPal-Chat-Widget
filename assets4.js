@@ -60,8 +60,11 @@ h3, p, input {
     position: fixed;
     bottom: 100px;
     right: 30px;
-    height: 45vw;
+    height: 35vw;
+    max-height: 400px;
     width: 35vw;
+    /*max-width: 400px;*/
+    min-width: 200px;
     background-color: white;
     margin-left: 30vw;
     margin-top: 5vw;
@@ -69,9 +72,10 @@ h3, p, input {
     z-index: -1;
     border-radius: 10px;
   }
+
   body .card #header {
     height: 5vw;
-    margin-top: -5vw;
+    margin-top: 0vh;
     background: #000;
     padding: 0vw;
     border-radius: 10px 10px 0 0;
@@ -82,12 +86,15 @@ h3, p, input {
     top: 100px;
     font-family: "Finger Paint", cursive;
     padding: 1vw;
+    margin-top: -0.5vh;
   }
   body .card #message-section::-webkit-scrollbar {
     width: 10px;
   }
   body .card #message-section {
-    height: 32vw;
+    /*height: 25vh;*/
+    height: 60%;
+    /*max-height: 200px;*/
     padding: 0 2.5vw;
     overflow-y: auto;
     scrollbar-width: thin;
@@ -157,6 +164,7 @@ h3, p, input {
     position: absolute;
     bottom: 25px;
   }
+
   body .card #input-section input {
     color: #000;
     min-width: 0.5vw;
@@ -168,6 +176,49 @@ h3, p, input {
     border-right: none;
     border-bottom: solid #000 0.1vw;
   }
+
+  @media screen and (max-width: 600px) {
+    * {
+        font-size: 3vw;
+    }
+
+    body .card #header {
+        height: 8vw;
+    }
+    body .card #header h1 {
+        font-size: 4vw;
+    }
+
+    body .card {
+        height: 60vh;
+        width: 80vw;
+        max-height: none;
+        min-width: none;
+    }
+
+    body .card #message-section {
+        height: 45vh;
+        width: 80vw;
+    }
+
+    body .card #input-section {
+        overflow: visible;
+    }
+
+    body .card #input-section input {
+        color: #000;
+        min-width: 0.5vw;
+        outline: none;
+        height: 5vw;
+        width: 70vw;
+      }
+
+      body .card #message-section .message {
+        line-height: 3vw;
+      }
+  }
+
+
   body .card .send {
     background: transparent;
     border: 0;

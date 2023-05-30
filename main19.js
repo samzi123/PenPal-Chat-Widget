@@ -10,6 +10,11 @@ function sendMessage() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  listenForMessageSend();
+});
+
+// adds event listeners on 'enter' key press and send button click
+function listenForMessageSend(){
   // listen for enter key press on input field
   const inputField = document.getElementById("input");
   inputField.addEventListener("keydown", function (e) {
@@ -23,14 +28,14 @@ document.addEventListener("DOMContentLoaded", () => {
   sendButton.addEventListener("click", function (e) {
     sendMessage();
   });
-});
+}
 
 function output(input) {
-  let product;
+  let botResponse;
 
-  //product = "botRepl dsf dfsiojdfij dsofij sdf sdf ds df dsf dsf dsf dsf ds fds fd sf dsf fds g fsg fsg fsd gds f dsgjd";
-  product = "Hi";
-  addChat(input, product);
+  //botResponse = "botRepl dsf dfsiojdfij dsofij sdf sdf ds df dsf dsf dsf dsf ds fds fd sf dsf fds g fsg fsg fsd gds f dsgjd";
+  botResponse = "Hi";
+  addChat(input, botResponse);
 
   // generate bot response here
 
@@ -52,7 +57,7 @@ const addChatMessage = (isBot, msg, uniqueId) => {
   return messageDiv;
 };
 
-async function addChat(input, product) {
+async function addChat(input, botResponse) {
   addChatMessage(false, input, generateUniqueID());
 
   let botDiv = addChatMessage(true, "", generateUniqueID());
@@ -60,7 +65,7 @@ async function addChat(input, product) {
 
   // remove "..." after loading message from bot
   clearInterval(loadInterval);
-  botDiv.innerHTML = `<span id="bot-response">${product}</span>`;
+  botDiv.innerHTML = `<span id="bot-response">${botResponse}</span>`;
 
   //mainDiv.appendChild(botDiv);
   var scroll = document.getElementById("message-section");
@@ -204,6 +209,7 @@ class MessageWidget {
       this.widgetIcon.classList.remove("widget__hidden");
       this.closeIcon.classList.add("widget__hidden");
       this.widgetContainer.classList.add("widget__hidden");
+      listenForMessageSend();
     }
   }
 }
