@@ -1,4 +1,4 @@
-import { CLOSE_ICON, MESSAGE_ICON, TICK_ICON, style } from "./assets5.js";
+import { CLOSE_ICON, MESSAGE_ICON, TICK_ICON, style } from "./assets6.js";
 
 let loadInterval;
 
@@ -8,6 +8,13 @@ function sendMessage() {
   const input = inputField.value.trim();
   input != "" && output(input);
   inputField.value = "";
+}
+
+// Function to receive and process data from the page
+function setDataFromPage(data) {
+  // Process the data as needed
+  console.log('Received data from page:', data);
+  console.log("id:", data.id);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
