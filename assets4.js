@@ -15,7 +15,6 @@ h3, p, input {
   bottom: 75px;
   position: absolute;
   transition: max-height .2s ease;
-  font-family: Helvetica, Arial ,sans-serif;
   background-color: #e6e6e6a6;
   border-radius: 10px;
   box-sizing: border-box;
@@ -84,7 +83,6 @@ h3, p, input {
     color: #fff;
     font-size: 2vw;
     top: 100px;
-    font-family: "Finger Paint", cursive;
     padding: 1vw;
     margin-top: -0.5vh;
   }

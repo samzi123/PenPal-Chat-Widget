@@ -3,6 +3,7 @@ import { CLOSE_ICON, MESSAGE_ICON, TICK_ICON, style } from "./assets4.js";
 let loadInterval;
 
 function sendMessage() {
+  console.log("window loc:", window.location.href);
   const inputField = document.getElementById("input");
   const input = inputField.value.trim();
   input != "" && output(input);
