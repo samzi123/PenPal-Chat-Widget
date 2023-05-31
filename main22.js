@@ -1,9 +1,12 @@
 import { CLOSE_ICON, MESSAGE_ICON, TICK_ICON, style } from "./assets6.js";
 
 let loadInterval;
+var chatbotID = "";
+//const BASE_URL = "https://sswj8m0la3.execute-api.af-south-1.amazonaws.com/dev/";
+const BASE_URL = "http://localhost:5001/dev/";
+let messageWidget;
 
 function sendMessage() {
-  console.log("window loc:", window.location.href);
   const inputField = document.getElementById("input");
   const input = inputField.value.trim();
   input != "" && output(input);
@@ -11,18 +14,45 @@ function sendMessage() {
 }
 
 // Function to receive and process data from the page
-// function setDataFromPage(data) {
-//   // Process the data as needed
-//   console.log('Received data from page:', data);
-//   console.log("id:", data.id);
-// }
-
-// Function to receive and process data from the page
 window.setDataFromPage = function(data) {
   // Process the data as needed
-  console.log('Received data from page:', data);
-  console.log("id:", data.id);
+  chatbotID = data.id;
+  chatbotID = "646330d6c251f7689abd9eb8";
+  getChatbotInfo();
 };
+
+const getChatbotInfo = async () => {
+  if(!chatbotID){
+    console.log("No chatbot ID found.");
+    return;
+  }
+  const url = BASE_URL + "chatbot/get_public_info"
+  const requestInfo = {
+    chatbotID: chatbotID,
+  };    
+  console.log("requestInfo:", requestInfo);
+
+  // fetch chatbot info
+  await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestInfo),
+    }).then(res => res.text())
+      .then(body => {
+          try {
+            const bodyJson = JSON.parse(body);
+            console.log("response:", bodyJson);
+            messageWidget.setIsVisible(true);
+          } catch {
+              throw Error(body);
+          }
+      }).catch(error => {
+        console.log(JSON.stringify(error));
+        console.log("Error fetching chatbot info:", error);
+      });
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   listenForMessageSend();
@@ -46,10 +76,7 @@ function listenForMessageSend(){
 }
 
 function output(input) {
-  let botResponse;
-
-  //botResponse = "botRepl dsf dfsiojdfij dsofij sdf sdf ds df dsf dsf dsf dsf ds fds fd sf dsf fds g fsg fsg fsd gds f dsgjd";
-  botResponse = "Hi";
+  let botResponse = "Hi";
   addChat(input, botResponse);
 
   // generate bot response here
@@ -115,13 +142,8 @@ class MessageWidget {
     this.open = false;
     this.initialize();
     this.injectStyles();
-  }
 
-  setData(data){
-    console.log("got request to set the data");
-    console.log("data:", data);
-    this.data = data;
-    console.log("id:", this.data.id);
+    window.setDataFromPage({id: "1234"});
   }
 
   position = "";
@@ -141,6 +163,7 @@ class MessageWidget {
      * Create and append a div element to the document body
      */
     const container = document.createElement("div");
+    this.mainContainer = container;
     container.style.position = "fixed";
     Object.keys(this.position).forEach(
       (key) => (container.style[key] = this.position[key])
@@ -192,6 +215,9 @@ class MessageWidget {
      */
     container.appendChild(this.widgetContainer);
     container.appendChild(buttonContainer);
+
+    // not visible until load chatbot info
+    this.setIsVisible(false);
   }
 
   createWidgetContent() {
@@ -220,6 +246,18 @@ class MessageWidget {
     document.head.appendChild(styleTag);
   }
 
+  // set whether the widget is visible or not
+  // only visible once the chatbot info has been loaded
+  setIsVisible(isVisible) {
+    console.log("setIsVisible", isVisible);
+    if(isVisible) {
+      this.mainContainer.classList.remove("widget__hidden");
+
+    } else {
+      this.mainContainer.classList.add("widget__hidden");
+    }
+  }
+
   toggleOpen() {
     this.open = !this.open;
     if (this.open) {
@@ -240,4 +278,4 @@ function initializeWidget() {
   return new MessageWidget();
 }
 
-initializeWidget();
+messageWidget = initializeWidget();
