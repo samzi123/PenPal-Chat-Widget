@@ -106,12 +106,13 @@ h3, p, input {
     border-radius: 6px;
     border: 3px solid var(--scrollbarBG);
   }
-  body .card #message-section #bot-response,
+  body .card #message-section #bot-response #user-response,
   body .card #message-section .user
    {
     position: relative;
     bottom: 0;
     min-height: 1.5vw;
+    line-height: 2.2vw;
     /* border: 0.15vw solid #777; */
     background-color: #fff;
     /* border-radius: 0px 1.5vw 1.5vw 1.8vw; */
@@ -211,9 +212,14 @@ h3, p, input {
         width: 70vw;
       }
 
-      body .card #message-section .message {
-        line-height: 3vw;
-      }
+    body .card #message-section .message {
+      line-height: 3vw;
+    }
+
+    body .card #message-section #bot-response #user-response,
+    body .card #message-section .user {
+      line-height: 5vw;
+    }
   }
 
 

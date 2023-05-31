@@ -5,11 +5,12 @@ var chatbotID = "";
 //const BASE_URL = "https://sswj8m0la3.execute-api.af-south-1.amazonaws.com/dev/";
 const BASE_URL = "http://localhost:5001/dev/";
 let messageWidget;
+var chatbotInfo = {};
 
 function sendMessage() {
   const inputField = document.getElementById("input");
   const input = inputField.value.trim();
-  input != "" && output(input);
+  (input != "" && chatbotID) && handleMessageSend(input);
   inputField.value = "";
 }
 
@@ -17,7 +18,7 @@ function sendMessage() {
 window.setDataFromPage = function(data) {
   // Process the data as needed
   chatbotID = data.id;
-  chatbotID = "646330d6c251f7689abd9eb8";
+  //chatbotID = "646330d6c251f7689abd9eb8";
   getChatbotInfo();
 };
 
@@ -30,7 +31,6 @@ const getChatbotInfo = async () => {
   const requestInfo = {
     chatbotID: chatbotID,
   };    
-  console.log("requestInfo:", requestInfo);
 
   // fetch chatbot info
   await fetch(url, {
@@ -41,15 +41,16 @@ const getChatbotInfo = async () => {
       body: JSON.stringify(requestInfo),
     }).then(res => res.text())
       .then(body => {
-          try {
-            const bodyJson = JSON.parse(body);
-            console.log("response:", bodyJson);
-            messageWidget.setIsVisible(true);
-          } catch {
-              throw Error(body);
-          }
+        try {
+          const bodyJson = JSON.parse(body);
+          chatbotInfo = bodyJson;
+          document.getElementsByClassName("penpal-header")[0].innerHTML = chatbotInfo.chatTitle;
+          document.getElementsByClassName("penpal-first-message")[0].innerHTML = chatbotInfo.welcomeMessage;
+          messageWidget.setIsVisible(true);
+        } catch {
+            throw Error(body);
+        }
       }).catch(error => {
-        console.log(JSON.stringify(error));
         console.log("Error fetching chatbot info:", error);
       });
 }
@@ -75,19 +76,52 @@ function listenForMessageSend(){
   });
 }
 
-function output(input) {
-  let botResponse = "Hi";
-  addChat(input, botResponse);
+async function handleMessageSend(input) {
+  addChatMessage(false, input, generateUniqueID());
 
-  // generate bot response here
+  let botDiv = addChatMessage(true, "", generateUniqueID());
+  loader(botDiv);
+  var scroll = document.getElementById("message-section");
+  scroll.scrollTop = scroll.scrollHeight;
 
+  await getBotResponse(input).then(res => res.text())
+    .then(body => {
+      try {
+        const botResponse = JSON.parse(body).response;
+
+        // remove "..." after loading message from bot
+        clearInterval(loadInterval);
+        botDiv.innerHTML = `<span id="bot-response">${botResponse}</span>`;
+      } catch {
+          throw Error(body);
+      }
+    }).catch(error => {
+      console.log("Error fetching chatbot info:", error);
+    });
+}
+
+// returns bot's response to a particular user input (as promise)
+const getBotResponse = async (input) => {
+  const url = BASE_URL + "chatbot/generate"
+  const requestInfo = {
+    input: input,
+    chatbotID: chatbotID,
+  };    
+
+  // generate bot response
+  return fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestInfo),
+    });
 }
 
 // returns a new chat message, either from bot or user
 const addChatMessage = (isBot, msg, uniqueId) => {
   const mainDiv = document.getElementById("message-section");
   let messageDiv = document.createElement("div");
-
   const botOrUser = isBot ? "bot" : "user";
 
   messageDiv.id = uniqueId;
@@ -98,21 +132,6 @@ const addChatMessage = (isBot, msg, uniqueId) => {
 
   return messageDiv;
 };
-
-async function addChat(input, botResponse) {
-  addChatMessage(false, input, generateUniqueID());
-
-  let botDiv = addChatMessage(true, "", generateUniqueID());
-  loader(botDiv);
-
-  // remove "..." after loading message from bot
-  clearInterval(loadInterval);
-  botDiv.innerHTML = `<span id="bot-response">${botResponse}</span>`;
-
-  //mainDiv.appendChild(botDiv);
-  var scroll = document.getElementById("message-section");
-  scroll.scrollTop = scroll.scrollHeight;
-}
 
 // generates a unique id for each bot message to be able to select it while loading
 const generateUniqueID = () => {
@@ -125,13 +144,13 @@ const generateUniqueID = () => {
 
 // to show "..." while loading message from bot
 const loader = (element) => {
-  element.textContent = '';
+  element.textContent = '.';
 
   loadInterval = setInterval(() => {
     element.textContent += '.';
 
     if (element.textContent.length > 3) {
-      element.textContent = '';
+      element.textContent = '.';
     }
   }, 300);
 };
@@ -224,10 +243,10 @@ class MessageWidget {
     this.widgetContainer.innerHTML = `
       <div class="card">
         <div id="header">
-            <h1>Chatbot</h1>
+            <h1 class="penpal-header">${chatbotInfo.chatTitle || ""}</h1>
         </div>
         <div id="message-section">
-          <div class="message bot" id="bot"><span id="bot-response">Hello. I am listening! Go on..</span></div>
+          <div class="message bot" id="bot"><span id="bot-response" class="penpal-first-message">Hello. I am listening! Go on..</span></div>
         </div>
         <div id="input-section">
           <input id="input" type="text" placeholder="Type a message" autocomplete="off" autofocus="autofocus"/>
@@ -249,7 +268,6 @@ class MessageWidget {
   // set whether the widget is visible or not
   // only visible once the chatbot info has been loaded
   setIsVisible(isVisible) {
-    console.log("setIsVisible", isVisible);
     if(isVisible) {
       this.mainContainer.classList.remove("widget__hidden");
 
