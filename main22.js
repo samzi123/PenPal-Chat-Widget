@@ -1,8 +1,7 @@
-import { CLOSE_ICON, MESSAGE_ICON, TICK_ICON, style } from "./assets6.js";
+import { CLOSE_ICON, MESSAGE_ICON, TICK_ICON, style, setColorsFromThemeName } from "./assets6.js";
 
 let loadInterval;
 var chatbotID = "";
-//const BASE_URL = "https://sswj8m0la3.execute-api.af-south-1.amazonaws.com/dev/";
 const BASE_URL = "http://localhost:5001/dev/";
 let messageWidget;
 var chatbotInfo = {};
@@ -18,7 +17,7 @@ function sendMessage() {
 window.setDataFromPage = function(data) {
   // Process the data as needed
   chatbotID = data.id;
-  //chatbotID = "646330d6c251f7689abd9eb8";
+  chatbotID = "646330d6c251f7689abd9eb8";
   getChatbotInfo();
 };
 
@@ -46,6 +45,10 @@ const getChatbotInfo = async () => {
           chatbotInfo = bodyJson;
           document.getElementsByClassName("penpal-header")[0].innerHTML = chatbotInfo.chatTitle;
           document.getElementsByClassName("penpal-first-message")[0].innerHTML = chatbotInfo.welcomeMessage;
+          setColorsFromThemeName(chatbotInfo.colorScheme);
+
+          // need to inject styles after setting colors
+          messageWidget.injectStyles();
           messageWidget.setIsVisible(true);
         } catch {
             throw Error(body);
@@ -249,7 +252,7 @@ class MessageWidget {
           <div class="message bot" id="bot"><span id="bot-response" class="penpal-first-message">Hello. I am listening! Go on..</span></div>
         </div>
         <div id="input-section">
-          <input id="input" type="text" placeholder="Type a message" autocomplete="off" autofocus="autofocus"/>
+          <input id="input" class="penpal-input-class" type="text" placeholder="Type a message" autocomplete="off" autofocus="autofocus"/>
           <button class="send" id="send-button">
             ${TICK_ICON}
           </button>
@@ -260,7 +263,7 @@ class MessageWidget {
 
   injectStyles() {
     const styleTag = document.createElement("style");
-    styleTag.innerHTML = style;
+    styleTag.innerHTML = style();
 
     document.head.appendChild(styleTag);
   }
