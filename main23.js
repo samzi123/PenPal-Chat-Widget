@@ -1,8 +1,9 @@
-import { CLOSE_ICON, MESSAGE_ICON, TICK_ICON, style, setColorsFromThemeName } from "./assets6.js";
+import { CLOSE_ICON, MESSAGE_ICON, TICK_ICON, style, setColorsFromThemeName } from "./assets7.js";
 
 let loadInterval;
 var chatbotID = "";
-const BASE_URL = "http://localhost:5001/dev/";
+const BASE_URL = "https://sswj8m0la3.execute-api.af-south-1.amazonaws.com/dev/";
+//const BASE_URL = "http://localhost:5001/dev/";
 let messageWidget;
 var chatbotInfo = {};
 
@@ -17,7 +18,6 @@ function sendMessage() {
 window.setDataFromPage = function(data) {
   // Process the data as needed
   chatbotID = data.id;
-  chatbotID = "646330d6c251f7689abd9eb8";
   getChatbotInfo();
 };
 
@@ -45,7 +45,8 @@ const getChatbotInfo = async () => {
           chatbotInfo = bodyJson;
           document.getElementsByClassName("penpal-header")[0].innerHTML = chatbotInfo.chatTitle;
           document.getElementsByClassName("penpal-first-message")[0].innerHTML = chatbotInfo.welcomeMessage;
-          setColorsFromThemeName(chatbotInfo.colorScheme);
+          setColorsFromThemeName(chatbotInfo?.colorScheme);
+          //setColorsFromThemeName("light");
 
           // need to inject styles after setting colors
           messageWidget.injectStyles();
@@ -165,7 +166,7 @@ class MessageWidget {
     this.initialize();
     this.injectStyles();
 
-    window.setDataFromPage({id: "1234"});
+    //window.setDataFromPage({id: "1234"});
   }
 
   position = "";
@@ -185,6 +186,7 @@ class MessageWidget {
      * Create and append a div element to the document body
      */
     const container = document.createElement("div");
+    container.classList.add("penpal-chatbot-widget-container");
     this.mainContainer = container;
     container.style.position = "fixed";
     Object.keys(this.position).forEach(
