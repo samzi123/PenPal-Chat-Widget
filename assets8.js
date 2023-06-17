@@ -40,22 +40,21 @@ export const setColorsFromThemeName = (themeName) => {
 
 export const style = () => {
   return `
-    .penpal-chatbot-widget-container {
-      .widget__container * {
+      .penpal-chatbot-widget-container .widget__container * {
         box-sizing: border-box;
       }        
 
-      h3, p, input {
+      .penpal-chatbot-widget-container h3, p, input {
         margin: 0;
         padding: 0;
         background-color: transparent;
       }
 
-      .penpal-input-class::placeholder {
+      .penpal-chatbot-widget-container .penpal-input-class::placeholder {
         color: ${primaryColorHexCode};
       }
 
-      .widget__container {
+      .penpal-chatbot-widget-container .widget__container {
         width: 400px;
         overflow: auto;
         right: -25px;
@@ -67,7 +66,7 @@ export const style = () => {
         box-sizing: border-box;
       }
 
-      .widget__icon {
+      .penpal-chatbot-widget-container .widget__icon {
         cursor: pointer;
         width: 60%;
         position: absolute;
@@ -76,10 +75,10 @@ export const style = () => {
         transition: transform .3s ease;
       }
 
-      .widget__hidden {
+      .penpal-chatbot-widget-container .widget__hidden {
         transform: scale(0);
       }
-      .button__container {
+      .penpal-chatbot-widget-container .button__container {
         border: none;
         width: 60px;
         height: 60px;
@@ -88,21 +87,21 @@ export const style = () => {
         background-color: ${primaryColorHexCode};
       }
 
-      .widget__container.hidden {
+      .penpal-chatbot-widget-container .widget__container.hidden {
         max-height: 0px;
       }
 
-      * {
+      .penpal-chatbot-widget-container * {
           font-size: 1.3vw;
           font-family: "Epilogue", sans-serif;
         }
         
-        html {
+        .penpal-chatbot-widget-container html {
           --scrollbarBG: #fff;
           --thumbBG: #90a4ae;
         }
         
-        body .card {
+        .penpal-chatbot-widget-container body .card {
           position: fixed;
           bottom: 100px;
           right: 30px;
@@ -119,14 +118,14 @@ export const style = () => {
           border-radius: 10px;
         }
 
-        body .card #header {
+        .penpal-chatbot-widget-container body .card #header {
           height: 5vw;
           margin-top: 0vh;
           background: ${primaryColorHexCode};
           padding: 0vw;
           border-radius: 10px 10px 0 0;
         }
-        body .card #header h1 {
+        .penpal-chatbot-widget-container body .card #header h1 {
           color: ${secondaryColorHexCode};
           font-size: 2vw;
           top: 100px;
@@ -134,26 +133,26 @@ export const style = () => {
           margin-top: 0vh;
           margin-left: 1.5vw;
         }
-        body .card #message-section::-webkit-scrollbar {
+        .penpal-chatbot-widget-container body .card #message-section::-webkit-scrollbar {
           width: 10px;
         }
-        body .card #message-section {
+        .penpal-chatbot-widget-container body .card #message-section {
           height: 60%;
           padding: 0 2.5vw;
           overflow-y: auto;
           scrollbar-width: thin;
           scrollbar-color: var(--thumbBG) var(--scrollbarBG);
         }
-        body .card #message-section::-webkit-scrollbar-track {
+        .penpal-chatbot-widget-container body .card #message-section::-webkit-scrollbar-track {
           background: var(--scrollbarBG);
         }
-        body .card #message-section::-webkit-scrollbar-thumb {
+        .penpal-chatbot-widget-container body .card #message-section::-webkit-scrollbar-thumb {
           background-color: var(--thumbBG);
           border-radius: 6px;
           border: 3px solid var(--scrollbarBG);
         }
-        body .card #message-section #bot-response #user-response,
-        body .card #message-section .user
+        .penpal-chatbot-widget-container body .card #message-section #bot-response #user-response,
+        .penpal-chatbot-widget-container body .card #message-section .user
         {
           position: relative;
           bottom: 0;
@@ -163,7 +162,7 @@ export const style = () => {
           margin: 1.5vw 0;
         }
         
-        body .bot
+        .penpal-chatbot-widget-container body .bot
         {
           position: relative;
           bottom: 0;
@@ -173,16 +172,16 @@ export const style = () => {
           border-radius: 0px 1.5vw 1.5vw 1.8vw;
           margin: 1.5vw 0;
         }
-        body .card #message-section .user {
+        .penpal-chatbot-widget-container body .card #message-section .user {
           border: 1.5px solid ${primaryColorHexCode};
           border-radius: 1.5vw 0vw 1.5vw 1.8vw;
           background-color: ${primaryColorHexCode};
           float: right;
         }
-        body .card #message-section .user #user-response {
+        .penpal-chatbot-widget-container body .card #message-section .user #user-response {
           color: ${secondaryColorHexCode};
         }
-        body .card #message-section .message {
+        .penpal-chatbot-widget-container body .card #message-section .message {
           color: ${primaryColorHexCode};
           clear: both;
           line-height: 1.2vw;
@@ -194,7 +193,7 @@ export const style = () => {
           word-wrap: break-word;
           z-index: 2;
         }
-        body .card #input-section {
+        .penpal-chatbot-widget-container body .card #input-section {
           z-index: 1;
           padding: 0 2.5vw;
           display: flex;
@@ -207,7 +206,7 @@ export const style = () => {
           bottom: 25px;
         }
 
-        body .card #input-section input {
+        .penpal-chatbot-widget-container body .card #input-section input {
           color: ${primaryColorHexCode};
           min-width: 0.5vw;
           outline: none;
@@ -220,18 +219,18 @@ export const style = () => {
         }
 
         @media screen and (max-width: 600px) {
-          * {
+          .penpal-chatbot-widget-container * {
               font-size: 3vw;
           }
 
-          body .card #header {
+          .penpal-chatbot-widget-container body .card #header {
               height: 8vw;
           }
-          body .card #header h1 {
+          .penpal-chatbot-widget-container body .card #header h1 {
               font-size: 4vw;
           }
 
-          body .card {
+          .penpal-chatbot-widget-container body .card {
               height: 60vh;
               width: 80vw;
               max-height: none;
@@ -239,16 +238,16 @@ export const style = () => {
               margin-top: 2vh;
           }
 
-          body .card #message-section {
+          .penpal-chatbot-widget-container body .card #message-section {
               height: 45vh;
               width: 80vw;
           }
 
-          body .card #input-section {
+          .penpal-chatbot-widget-container body .card #input-section {
             overflow: visible;
           }
 
-          body .card #input-section input {
+          .penpal-chatbot-widget-container body .card #input-section input {
             color: ${primaryColorHexCode};
             min-width: 0.5vw;
             outline: none;
@@ -256,17 +255,17 @@ export const style = () => {
             width: 70vw;
           }
 
-          body .card #message-section .message {
+          .penpal-chatbot-widget-container body .card #message-section .message {
             line-height: 3vw;
           }
 
-          body .card #message-section #bot-response #user-response,
-          body .card #message-section .user {
+          .penpal-chatbot-widget-container body .card #message-section #bot-response #user-response,
+          .penpal-chatbot-widget-container body .card #message-section .user {
             line-height: 5vw;
           }
         }
 
-        body .card .send {
+        .penpal-chatbot-widget-container body .card .send {
           background: transparent;
           border: 0;
           cursor: pointer;
@@ -279,7 +278,7 @@ export const style = () => {
           color: ${primaryColorHexCode};
 
         }
-        body .card .send .circle {
+        .penpal-chatbot-widget-container body .card .send .circle {
           position: relative;
           width: 4.8vw;
           height: 4.8vw;
@@ -289,13 +288,12 @@ export const style = () => {
           color: ${primaryColorHexCode};
 
         }
-        body .card .send .circle i {
+        .penpal-chatbot-widget-container body .card .send .circle i {
           font-size: 3vw;
           margin-left: -1vw;
           margin-top: 1vw;
           color: ${primaryColorHexCode};
         }
-      }
     `;
 }
 

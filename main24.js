@@ -1,4 +1,4 @@
-import { CLOSE_ICON, MESSAGE_ICON, TICK_ICON, style, setColorsFromThemeName } from "./assets7.js";
+import { CLOSE_ICON, MESSAGE_ICON, TICK_ICON, style, setColorsFromThemeName } from "./assets8.js";
 
 let loadInterval;
 var chatbotID = "";
@@ -18,6 +18,7 @@ function sendMessage() {
 window.setDataFromPage = function(data) {
   // Process the data as needed
   chatbotID = data.id;
+  chatbotID = "646330d6c251f7689abd9eb8";
   getChatbotInfo();
 };
 
