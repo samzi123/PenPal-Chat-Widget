@@ -1,4 +1,4 @@
-import { CLOSE_ICON, MESSAGE_ICON, TICK_ICON, style, setColorsFromThemeName } from "./assets14.js";
+import { CLOSE_ICON, MESSAGE_ICON, TICK_ICON, style, setColorsFromThemeName } from "./assets15.js";
 
 let loadInterval;
 var chatbotID = "";
@@ -62,9 +62,9 @@ const getChatbotInfo = async () => {
       });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  listenForMessageSend();
-});
+// document.addEventListener("DOMContentLoaded", () => {
+//   listenForMessageSend();
+// });
 
 // adds event listeners on 'enter' key press and send button click
 function listenForMessageSend(){
@@ -169,6 +169,7 @@ class MessageWidget {
     this.open = false;
     this.initialize();
     this.injectStyles();
+    listenForMessageSend();
     console.log("finshed constructor, now injecting styles!!");
 
     window.setDataFromPage({id: "646330d6c251f7689abd9eb8"});
