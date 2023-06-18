@@ -44,6 +44,10 @@ export const style = () => {
       box-sizing: border-box;
     }        
 
+    .penpal-chatbot-widget-container {
+      z-index: 999999;
+    }
+
     .penpal-chatbot-widget-container h3, p, input {
       margin: 0;
       padding: 0;
