@@ -8,7 +8,7 @@ let messageWidget;
 var chatbotInfo = {};
 
 function sendMessage() {
-  const inputField = document.getElementById("input");
+  const inputField = document.getElementById("penpal-chatbot-widget-input");
   const input = inputField.value.trim();
   (input != "" && chatbotID) && handleMessageSend(input);
   inputField.value = "";
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // adds event listeners on 'enter' key press and send button click
 function listenForMessageSend(){
   // listen for enter key press on input field
-  const inputField = document.getElementById("input");
+  const inputField = document.getElementById("penpal-chatbot-widget-input");
   inputField.addEventListener("keydown", function (e) {
     if (e.code === "Enter") {
       sendMessage();
@@ -74,7 +74,7 @@ function listenForMessageSend(){
   });
 
   // listen for send button click
-  const sendButton = document.getElementById("send-button");
+  const sendButton = document.getElementById("penpal-chatbot-widget-send-button");
   sendButton.addEventListener("click", function (e) {
     sendMessage();
   });
@@ -85,7 +85,7 @@ async function handleMessageSend(input) {
 
   let botDiv = addChatMessage(true, "", generateUniqueID());
   loader(botDiv);
-  var scroll = document.getElementById("message-section");
+  var scroll = document.getElementById("penpal-chatbot-widget-message-section");
   scroll.scrollTop = scroll.scrollHeight;
 
   await getBotResponse(input).then(res => res.text())
@@ -95,7 +95,7 @@ async function handleMessageSend(input) {
 
         // remove "..." after loading message from bot
         clearInterval(loadInterval);
-        botDiv.innerHTML = `<span id="bot-response">${botResponse}</span>`;
+        botDiv.innerHTML = `<span id="penpal-chatbot-widget-bot-response">${botResponse}</span>`;
       } catch {
           throw Error(body);
       }
@@ -124,7 +124,7 @@ const getBotResponse = async (input) => {
 
 // returns a new chat message, either from bot or user
 const addChatMessage = (isBot, msg, uniqueId) => {
-  const mainDiv = document.getElementById("message-section");
+  const mainDiv = document.getElementById("penpal-chatbot-widget-message-section");
   let messageDiv = document.createElement("div");
   const botOrUser = isBot ? "bot" : "user";
 
@@ -245,16 +245,16 @@ class MessageWidget {
 
   createWidgetContent() {
     this.widgetContainer.innerHTML = `
-      <div class="card">
+      <div class="penpal-chatbot-widget-card">
         <div id="header">
             <h1 class="penpal-header">${chatbotInfo.chatTitle || ""}</h1>
         </div>
-        <div id="message-section">
-          <div class="message bot" id="bot"><span id="bot-response" class="penpal-first-message">Hello. I am listening! Go on..</span></div>
+        <div id="penpal-chatbot-widget-message-section">
+          <div class="penpal-chatbot-widget-message bot" id="bot"><span id="penpal-chatbot-widget-bot-response" class="penpal-first-message">Hello. I am listening! Go on..</span></div>
         </div>
-        <div id="input-section">
+        <div id="penpal-chatbot-widget-input-section">
           <input id="input" class="penpal-input-class" type="text" placeholder="Type a message" autocomplete="off" autofocus="autofocus"/>
-          <button class="send" id="send-button">
+          <button class="penpal-chatbot-widget-send" id="penpal-chatbot-widget-send-button">
             ${TICK_ICON}
           </button>
         </div>
