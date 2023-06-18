@@ -31,6 +31,7 @@ const getChatbotInfo = async () => {
   const requestInfo = {
     chatbotID: chatbotID,
   };    
+  console.log("requesting chagbot")
 
   // fetch chatbot info
   await fetch(url, {
@@ -43,15 +44,17 @@ const getChatbotInfo = async () => {
       .then(body => {
         try {
           const bodyJson = JSON.parse(body);
+          console.log("chatbot info: ", bodyJson);
           chatbotInfo = bodyJson;
           document.getElementsByClassName("penpal-header")[0].innerHTML = chatbotInfo.chatTitle;
           document.getElementsByClassName("penpal-first-message")[0].innerHTML = chatbotInfo.welcomeMessage;
-          setColorsFromThemeName(chatbotInfo?.colorScheme);
+          setColorsFromThemeName(chatbotInfo.colorScheme);
 
           // need to inject styles after setting colors
           messageWidget.injectStyles();
           messageWidget.setIsVisible(true);
         } catch {
+            console.log("Error fetching");
             throw Error(body);
         }
       }).catch(error => {
@@ -161,11 +164,13 @@ const loader = (element) => {
 
 class MessageWidget {
   constructor(position = "bottom-right") {
+    console.log("in constructor!!");
     this.position = this.getPosition(position);
     this.open = false;
     this.initialize();
     this.injectStyles();
-    //console.log("just injected styles");
+    console.log("finshed constructor, now injecting styles!!");
+
     //window.setDataFromPage({id: "646330d6c251f7689abd9eb8"});
   }
 
