@@ -171,7 +171,7 @@ class MessageWidget {
     this.injectStyles();
     console.log("finshed constructor, now injecting styles!!");
 
-    //window.setDataFromPage({id: "646330d6c251f7689abd9eb8"});
+    window.setDataFromPage({id: "646330d6c251f7689abd9eb8"});
   }
 
   position = "";
@@ -190,7 +190,8 @@ class MessageWidget {
     /**
      * Create and append a div element to the document body
      */
-    const container = document.createElement("div");
+    const container = document.createElement("div");;
+    container.classList.add("penpal-chatbot-widget-container");
     this.mainContainer = container;
     container.style.position = "fixed";
     Object.keys(this.position).forEach(
