@@ -1,4 +1,4 @@
-import { CLOSE_ICON, MESSAGE_ICON, TICK_ICON, style, setColorsFromThemeName } from "./assets12.js";
+import { CLOSE_ICON, MESSAGE_ICON, TICK_ICON, style, setColorsFromThemeName } from "./assets13.js";
 
 let loadInterval;
 var chatbotID = "";
@@ -171,7 +171,7 @@ class MessageWidget {
     this.injectStyles();
     console.log("finshed constructor, now injecting styles!!");
 
-    //window.setDataFromPage({id: "646330d6c251f7689abd9eb8"});
+    window.setDataFromPage({id: "646330d6c251f7689abd9eb8"});
   }
 
   position = "";
