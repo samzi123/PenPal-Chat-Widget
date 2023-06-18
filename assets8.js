@@ -75,7 +75,7 @@ export const style = () => {
         transition: transform .3s ease;
       }
 
-      .penpal-chatbot-widget-container .widget__hidden {
+      .penpal-chatbot-widget-container .penpal-chatbot-widget-hidden {
         transform: scale(0);
       }
       .penpal-chatbot-widget-container .button__container {

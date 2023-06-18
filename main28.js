@@ -1,4 +1,4 @@
-import { CLOSE_ICON, MESSAGE_ICON, TICK_ICON, style, setColorsFromThemeName } from "./assets11.js";
+import { CLOSE_ICON, MESSAGE_ICON, TICK_ICON, style, setColorsFromThemeName } from "./assets12.js";
 
 let loadInterval;
 var chatbotID = "";
@@ -171,7 +171,7 @@ class MessageWidget {
     this.injectStyles();
     console.log("finshed constructor, now injecting styles!!");
 
-    window.setDataFromPage({id: "646330d6c251f7689abd9eb8"});
+    //window.setDataFromPage({id: "646330d6c251f7689abd9eb8"});
   }
 
   position = "";
@@ -214,11 +214,11 @@ class MessageWidget {
     this.widgetIcon = widgetIconElement;
 
     /**
-     * Create a span element for the close icon, give it a class of 'widget__icon' and 'widget__hidden' which would be removed whenever the widget is closed, update it's innerHTML property to an icon which would serve as the widget icon during that state.
+     * Create a span element for the close icon, give it a class of 'widget__icon' and 'penpal-chatbot-widget-hidden' which would be removed whenever the widget is closed, update it's innerHTML property to an icon which would serve as the widget icon during that state.
      */
     const closeIconElement = document.createElement("span");
     closeIconElement.innerHTML = CLOSE_ICON;
-    closeIconElement.classList.add("widget__icon", "widget__hidden");
+    closeIconElement.classList.add("widget__icon", "penpal-chatbot-widget-hidden");
     this.closeIcon = closeIconElement;
 
     /**
@@ -229,10 +229,10 @@ class MessageWidget {
     buttonContainer.addEventListener("click", this.toggleOpen.bind(this));
 
     /**
-     * Create a container for the widget and add the following classes:- "widget__hidden", "widget__container"
+     * Create a container for the widget and add the following classes:- "penpal-chatbot-widget-hidden", "widget__container"
      */
     this.widgetContainer = document.createElement("div");
-    this.widgetContainer.classList.add("widget__hidden", "widget__container");
+    this.widgetContainer.classList.add("penpal-chatbot-widget-hidden", "widget__container");
 
     /**
      * Invoke the `createWidget()` method
@@ -279,24 +279,24 @@ class MessageWidget {
   // only visible once the chatbot info has been loaded
   setIsVisible(isVisible) {
     if(isVisible) {
-      this.mainContainer.classList.remove("widget__hidden");
+      this.mainContainer.classList.remove("penpal-chatbot-widget-hidden");
 
     } else {
-      this.mainContainer.classList.add("widget__hidden");
+      this.mainContainer.classList.add("penpal-chatbot-widget-hidden");
     }
   }
 
   toggleOpen() {
     this.open = !this.open;
     if (this.open) {
-      this.widgetIcon.classList.add("widget__hidden");
-      this.closeIcon.classList.remove("widget__hidden");
-      this.widgetContainer.classList.remove("widget__hidden");
+      this.widgetIcon.classList.add("penpal-chatbot-widget-hidden");
+      this.closeIcon.classList.remove("penpal-chatbot-widget-hidden");
+      this.widgetContainer.classList.remove("penpal-chatbot-widget-hidden");
     } else {
       this.createWidgetContent();
-      this.widgetIcon.classList.remove("widget__hidden");
-      this.closeIcon.classList.add("widget__hidden");
-      this.widgetContainer.classList.add("widget__hidden");
+      this.widgetIcon.classList.remove("penpal-chatbot-widget-hidden");
+      this.closeIcon.classList.add("penpal-chatbot-widget-hidden");
+      this.widgetContainer.classList.add("penpal-chatbot-widget-hidden");
       listenForMessageSend();
     }
   }

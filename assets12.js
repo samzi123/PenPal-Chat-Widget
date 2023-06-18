@@ -75,7 +75,7 @@ export const style = () => {
       transition: transform .3s ease;
     }
 
-    .penpal-chatbot-widget-container .widget__hidden {
+    .penpal-chatbot-widget-hidden {
       transform: scale(0);
     }
     .penpal-chatbot-widget-container .button__container {
@@ -114,7 +114,7 @@ export const style = () => {
         margin-left: 30vw;
         margin-top: 5vw;
         box-shadow: 0 0 18px 8px rgba(0, 0, 0, 0.1), 0 0 32px 32px rgba(0, 0, 0, 0.08);
-        z-index: -1;
+        z-index: -99999;
         border-radius: 10px;
       }
 
@@ -190,10 +190,10 @@ export const style = () => {
         margin: 8px 0;
         max-width: 85%;
         word-wrap: break-word;
-        z-index: 2;
+        z-index: -9999;
       }
       body .penpal-chatbot-widget-container .penpal-chatbot-widget-card #penpal-chatbot-widget-input-section {
-        z-index: 1;
+        z-index: -9998;
         padding: 0 2.5vw;
         display: flex;
         flex-direction: row;
@@ -215,6 +215,12 @@ export const style = () => {
         border-left: none;
         border-right: none;
         border-bottom: solid ${primaryColorHexCode} 0.1vw;
+      }
+
+      // hide all focus styling on all inputs that are in focus and are a child of .penpal-chatbot-widget-container
+      body .penpal-chatbot-widget-container .penpal-chatbot-widget-card #penpal-chatbot-widget-input-section input:focus {
+        outline: none;
+        box-shadow: none;
       }
 
       @media screen and (max-width: 600px) {
