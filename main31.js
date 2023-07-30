@@ -1,21 +1,27 @@
-import { CLOSE_ICON, MESSAGE_ICON, TICK_ICON, style, setColorsFromThemeName } from "./assets15.js";
+import {
+  CLOSE_ICON,
+  MESSAGE_ICON,
+  TICK_ICON,
+  style,
+  setColorsFromThemeName,
+} from "./assets15.js";
 
 let loadInterval;
 var chatbotID = "";
-//const BASE_URL = "http://localhost:5001/dev/";
-const BASE_URL = "https://sswj8m0la3.execute-api.af-south-1.amazonaws.com/dev/";
+const BASE_URL = "http://localhost:5001/dev/";
+//const BASE_URL = "https://sswj8m0la3.execute-api.af-south-1.amazonaws.com/dev/";
 let messageWidget;
 var chatbotInfo = {};
 
 function sendMessage() {
   const inputField = document.getElementById("penpal-chatbot-widget-input");
   const input = inputField.value.trim();
-  (input != "" && chatbotID) && handleMessageSend(input);
+  input != "" && chatbotID && handleMessageSend(input);
   inputField.value = "";
 }
 
 // Function to receive and process data from the page
-window.setDataFromPage = function(data) {
+window.setDataFromPage = function (data) {
   // Process the data as needed
   chatbotID = data.id;
   //chatbotID = "646330d6c251f7689abd9eb8";
@@ -23,51 +29,56 @@ window.setDataFromPage = function(data) {
 };
 
 const getChatbotInfo = async () => {
-  if(!chatbotID){
+  if (!chatbotID) {
     console.log("No chatbot ID found.");
     return;
   }
-  const url = BASE_URL + "chatbot/get_public_info"
+  const url = BASE_URL + "chatbot/get_public_info";
   const requestInfo = {
     chatbotID: chatbotID,
-  };    
-  console.log("requesting chagbot")
+  };
+  console.log("requesting chagbot");
 
   // fetch chatbot info
   await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      },
-      body: JSON.stringify(requestInfo),
-    }).then(res => res.text())
-      .then(body => {
-        try {
-          const bodyJson = JSON.parse(body);
-          console.log("chatbot info: ", bodyJson);
-          chatbotInfo = bodyJson;
-          document.getElementsByClassName("penpal-header")[0].innerHTML = chatbotInfo.chatTitle;
-          document.getElementsByClassName("penpal-first-message")[0].innerHTML = chatbotInfo.welcomeMessage;
-          setColorsFromThemeName(chatbotInfo.colorScheme);
+    },
+    body: JSON.stringify(requestInfo),
+  })
+    .then((res) => res.text())
+    .then((body) => {
+      try {
+        const bodyJson = JSON.parse(body);
+        console.log("chatbot info: ", bodyJson);
+        chatbotInfo = bodyJson;
+        document.getElementsByClassName("penpal-header")[0].innerHTML =
+          chatbotInfo.chatTitle;
+        document.getElementsByClassName("penpal-first-message")[0].innerHTML =
+          chatbotInfo.welcomeMessage;
+        //setColorsFromThemeName(chatbotInfo.colorScheme);
+        setColorsFromThemeName("dark");
 
-          // need to inject styles after setting colors
-          messageWidget.injectStyles();
-          messageWidget.setIsVisible(true);
-        } catch {
-            console.log("Error fetching");
-            throw Error(body);
-        }
-      }).catch(error => {
-        console.log("Error fetching chatbot info:", error);
-      });
-}
+        // need to inject styles after setting colors
+        messageWidget.injectStyles();
+        messageWidget.setIsVisible(true);
+      } catch {
+        console.log("Error fetching");
+        throw Error(body);
+      }
+    })
+    .catch((error) => {
+      console.log("Error fetching chatbot info:", error);
+    });
+};
 
 // document.addEventListener("DOMContentLoaded", () => {
 //   listenForMessageSend();
 // });
 
 // adds event listeners on 'enter' key press and send button click
-function listenForMessageSend(){
+function listenForMessageSend() {
   // listen for enter key press on input field
   const inputField = document.getElementById("penpal-chatbot-widget-input");
   inputField.addEventListener("keydown", function (e) {
@@ -77,7 +88,9 @@ function listenForMessageSend(){
   });
 
   // listen for send button click
-  const sendButton = document.getElementById("penpal-chatbot-widget-send-button");
+  const sendButton = document.getElementById(
+    "penpal-chatbot-widget-send-button"
+  );
   sendButton.addEventListener("click", function (e) {
     sendMessage();
   });
@@ -91,8 +104,9 @@ async function handleMessageSend(input) {
   var scroll = document.getElementById("penpal-chatbot-widget-message-section");
   scroll.scrollTop = scroll.scrollHeight;
 
-  await getBotResponse(input).then(res => res.text())
-    .then(body => {
+  await getBotResponse(input)
+    .then((res) => res.text())
+    .then((body) => {
       try {
         const botResponse = JSON.parse(body).response;
 
@@ -100,34 +114,37 @@ async function handleMessageSend(input) {
         clearInterval(loadInterval);
         botDiv.innerHTML = `<span id="penpal-chatbot-widget-bot-response">${botResponse}</span>`;
       } catch {
-          throw Error(body);
+        throw Error(body);
       }
-    }).catch(error => {
+    })
+    .catch((error) => {
       console.log("Error fetching chatbot info:", error);
     });
 }
 
 // returns bot's response to a particular user input (as promise)
 const getBotResponse = async (input) => {
-  const url = BASE_URL + "chatbot/generate"
+  const url = BASE_URL + "chatbot/generate";
   const requestInfo = {
     input: input,
     chatbotID: chatbotID,
-  };    
+  };
 
   // generate bot response
   return fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      },
-      body: JSON.stringify(requestInfo),
-    });
-}
+    },
+    body: JSON.stringify(requestInfo),
+  });
+};
 
 // returns a new chat message, either from bot or user
 const addChatMessage = (isBot, msg, uniqueId) => {
-  const mainDiv = document.getElementById("penpal-chatbot-widget-message-section");
+  const mainDiv = document.getElementById(
+    "penpal-chatbot-widget-message-section"
+  );
   let messageDiv = document.createElement("div");
   const botOrUser = isBot ? "bot" : "user";
 
@@ -151,13 +168,13 @@ const generateUniqueID = () => {
 
 // to show "..." while loading message from bot
 const loader = (element) => {
-  element.textContent = '.';
+  element.textContent = ".";
 
   loadInterval = setInterval(() => {
-    element.textContent += '.';
+    element.textContent += ".";
 
     if (element.textContent.length > 3) {
-      element.textContent = '.';
+      element.textContent = ".";
     }
   }, 300);
 };
@@ -172,7 +189,7 @@ class MessageWidget {
     listenForMessageSend();
     console.log("finshed constructor, now injecting styles!!");
 
-    window.setDataFromPage({id: "646330d6c251f7689abd9eb8"});
+    window.setDataFromPage({ id: "646330d6c251f7689abd9eb8" });
   }
 
   position = "";
@@ -191,7 +208,7 @@ class MessageWidget {
     /**
      * Create and append a div element to the document body
      */
-    const container = document.createElement("div");;
+    const container = document.createElement("div");
     container.classList.add("penpal-chatbot-widget-container");
     this.mainContainer = container;
     container.style.position = "fixed";
@@ -219,7 +236,10 @@ class MessageWidget {
      */
     const closeIconElement = document.createElement("span");
     closeIconElement.innerHTML = CLOSE_ICON;
-    closeIconElement.classList.add("widget__icon", "penpal-chatbot-widget-hidden");
+    closeIconElement.classList.add(
+      "widget__icon",
+      "penpal-chatbot-widget-hidden"
+    );
     this.closeIcon = closeIconElement;
 
     /**
@@ -233,7 +253,10 @@ class MessageWidget {
      * Create a container for the widget and add the following classes:- "penpal-chatbot-widget-hidden", "widget__container"
      */
     this.widgetContainer = document.createElement("div");
-    this.widgetContainer.classList.add("penpal-chatbot-widget-hidden", "widget__container");
+    this.widgetContainer.classList.add(
+      "penpal-chatbot-widget-hidden",
+      "widget__container"
+    );
 
     /**
      * Invoke the `createWidget()` method
@@ -279,9 +302,8 @@ class MessageWidget {
   // set whether the widget is visible or not
   // only visible once the chatbot info has been loaded
   setIsVisible(isVisible) {
-    if(isVisible) {
+    if (isVisible) {
       this.mainContainer.classList.remove("penpal-chatbot-widget-hidden");
-
     } else {
       this.mainContainer.classList.add("penpal-chatbot-widget-hidden");
     }
