@@ -97,7 +97,15 @@ export const style = () => {
 
     .penpal-chatbot-widget-container * {
         font-size: 1vw;
+        line-height: 1.2;
         // font-family: "Epilogue", sans-serif;
+      }
+
+      @media (min-width: 600px) and (max-width: 992px) {
+        .penpal-chatbot-widget-container * {
+          font-size: 1.6vw;
+          line-height: 1.2;
+        }
       }
       
       .penpal-chatbot-widget-container html {
@@ -122,6 +130,14 @@ export const style = () => {
         z-index: 99999;
         border-radius: 10px;
       }
+      @media (min-width: 600px) and (max-width: 992px) {
+        body .penpal-chatbot-widget-container .penpal-chatbot-widget-card {
+          height: 60vw;
+          max-height: 1000px;
+          width: 50vw;
+
+        }
+      }
 
       /* top section with Chat name */
       body .penpal-chatbot-widget-container .penpal-chatbot-widget-card #penpal-chatbot-widget-header{
@@ -144,7 +160,7 @@ export const style = () => {
         width: 10px;
       }
       body .penpal-chatbot-widget-container .penpal-chatbot-widget-card #penpal-chatbot-widget-message-section {
-        height: 70%;
+        height: 80%;
         padding: 0 2.5vw;
         overflow-y: auto;
         scrollbar-width: thin;
@@ -202,6 +218,8 @@ export const style = () => {
         word-wrap: break-word;
         z-index: 9999;
       }
+
+      /* For the type message section*/
       body .penpal-chatbot-widget-container .penpal-chatbot-widget-card #penpal-chatbot-widget-input-section {
         z-index: 9999;
         padding: 0 2.5vw;
@@ -210,11 +228,25 @@ export const style = () => {
         flex-direction: row;
         align-items: flex-end;
         overflow: hidden;
-        height: 4vw;
+        height: 8vw;
         width: 100%;
         position: absolute;
         bottom: 20px;
         background-color: #ffffff;
+      }
+
+      @media (max-width: 600px){
+        body .penpal-chatbot-widget-container .penpal-chatbot-widget-card #penpal-chatbot-widget-input-section {
+        min-height: 12vw;
+        }
+
+      }
+
+      @media (max-width: 601px) and (max-width: 992px){
+        body .penpal-chatbot-widget-container .penpal-chatbot-widget-card #penpal-chatbot-widget-input-section {
+        min-height: 12vw;
+        }
+
       }
 
       body .penpal-chatbot-widget-container .penpal-chatbot-widget-card #penpal-chatbot-widget-input-section input {
@@ -222,13 +254,39 @@ export const style = () => {
         min-width: 0.5vw;
         outline: none;
         width: 100%;
+        height: 40%;
         padding: 1vw 1.5vw;
         border: none;
         border-radius: 1vw;
         border: 1px solid #ffffff;
         background-color: #f3f3f3;
         font-size: 1vw;
+       
     }
+
+    @media (max-width: 600px){
+      body .penpal-chatbot-widget-container .penpal-chatbot-widget-card #penpal-chatbot-widget-input-section input {
+        min-height: 8vw;
+        min-width: 100%;
+        font-size: 4vw;
+        border-radius: 2vw;
+
+      }
+    }
+
+    @media (min-width: 601px) and (max-width: 992px){
+      body .penpal-chatbot-widget-container .penpal-chatbot-widget-card #penpal-chatbot-widget-input-section input {
+        height: 60%;
+        width: 100%;
+        font-size: 2vw;
+
+      }
+    }
+
+
+    
+
+    
     
     body .penpal-chatbot-widget-container .penpal-chatbot-widget-card #penpal-chatbot-widget-input-section input:focus {
        
@@ -309,13 +367,27 @@ export const style = () => {
 
   body .tick-icon {
     width: 6vw;
-    height: 4vw;
+    height: 3vw;
     max-width: 40px;
     min-width: 10px;
     max-height: 50px;
     min-height:10px;
     display: block;
     margin: auto;
+}
+
+@media (max-width: 600px){
+  body .tick-icon {
+    width: 8vw;
+    height: 7vw;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 992px){
+  body .tick-icon {
+    width: 8vw;
+    height: 4vw;
+  }
 }
   
     
