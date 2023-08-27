@@ -8,8 +8,8 @@ import {
 
 let loadInterval;
 var chatbotID = "";
-const BASE_URL = "http://localhost:5001/dev/";
-//const BASE_URL = "https://sswj8m0la3.execute-api.af-south-1.amazonaws.com/dev/";
+//const BASE_URL = "http://localhost:5001/dev/";
+const BASE_URL = "https://sswj8m0la3.execute-api.af-south-1.amazonaws.com/dev/";
 let messageWidget;
 var chatbotInfo = {};
 
@@ -57,8 +57,8 @@ const getChatbotInfo = async () => {
           chatbotInfo.chatTitle;
         document.getElementsByClassName("penpal-first-message")[0].innerHTML =
           chatbotInfo.welcomeMessage;
-        //setColorsFromThemeName(chatbotInfo.colorScheme);
-        setColorsFromThemeName("dark");
+        setColorsFromThemeName(chatbotInfo.colorScheme);
+        //setColorsFromThemeName("dark");
 
         // need to inject styles after setting colors
         messageWidget.injectStyles();
