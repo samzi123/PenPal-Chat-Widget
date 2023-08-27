@@ -274,7 +274,7 @@ export const style = () => {
       }
     }
 
-    @media (min-width: 601px) and (max-width: 992px){
+    @media (min-width: 600px) and (max-width: 992px){
       body .penpal-chatbot-widget-container .penpal-chatbot-widget-card #penpal-chatbot-widget-input-section input {
         height: 60%;
         width: 100%;
@@ -325,7 +325,7 @@ export const style = () => {
 
         body .penpal-chatbot-widget-container .penpal-chatbot-widget-card #penpal-chatbot-widget-input-section input {
           z-index: 99999;
-          color: #ffffff;
+          color: ${primaryColorHexCode};
           min-width: 0.5vw;
           outline: none;
           height: 5vw;
