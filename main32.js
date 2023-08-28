@@ -1,4 +1,4 @@
-import { CLOSE_ICON, MESSAGE_ICON, TICK_ICON, style, setColorsFromThemeName } from "./assets15.js";
+import { CLOSE_ICON, MESSAGE_ICON, TICK_ICON, style, setColorsFromThemeName } from "./assets16.js";
 
 let loadInterval;
 var chatbotID = "";
@@ -31,7 +31,6 @@ const getChatbotInfo = async () => {
   const requestInfo = {
     chatbotID: chatbotID,
   };    
-  console.log("requesting chagbot")
 
   // fetch chatbot info
   await fetch(url, {
@@ -44,7 +43,6 @@ const getChatbotInfo = async () => {
       .then(body => {
         try {
           const bodyJson = JSON.parse(body);
-          console.log("chatbot info: ", bodyJson);
           chatbotInfo = bodyJson;
           document.getElementsByClassName("penpal-header")[0].innerHTML = chatbotInfo.chatTitle;
           document.getElementsByClassName("penpal-first-message")[0].innerHTML = chatbotInfo.welcomeMessage;
@@ -113,6 +111,7 @@ const getBotResponse = async (input) => {
   const requestInfo = {
     input: input,
     chatbotID: chatbotID,
+    chatID: messageWidget.chatID,
   };    
 
   // generate bot response
@@ -164,20 +163,26 @@ const loader = (element) => {
 
 class MessageWidget {
   constructor(position = "bottom-right") {
-    console.log("in constructor!!");
+    // TODO: remove before publishing
+    //window.setDataFromPage({id: "646330d6c251f7689abd9eb8"});
+
     this.position = this.getPosition(position);
     this.open = false;
-    this.initialize();
-    this.injectStyles();
-    listenForMessageSend();
-    console.log("finshed constructor, now injecting styles!!");
+    this.chatID = generateUniqueID();
 
-    window.setDataFromPage({id: "646330d6c251f7689abd9eb8"});
+    if (chatbotID) {
+      this.initialize();
+      this.injectStyles();
+      listenForMessageSend();
+    } else {
+      console.log("No chatbot ID found.");
+    }
   }
 
   position = "";
   open = false;
   widgetContainer = null;
+  chatID = "";
 
   getPosition(position) {
     const [vertical, horizontal] = position.split("-");
