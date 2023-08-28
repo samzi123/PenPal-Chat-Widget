@@ -177,13 +177,13 @@ class MessageWidget {
     this.open = false;
     this.chatID = generateUniqueID();
 
-    if (chatbotID) {
-      this.initialize();
-      this.injectStyles();
-      listenForMessageSend();
-    } else {
-      console.log("No chatbot ID found.");
-    }
+   // if (chatbotID) {
+    this.initialize();
+    this.injectStyles();
+    listenForMessageSend();
+    // } else {
+    //   console.log("No chatbot ID found.");
+    // }
   }
 
   position = "";
