@@ -94,7 +94,17 @@ function listenForMessageSend() {
   sendButton.addEventListener("click", function (e) {
     sendMessage();
   });
+  scrollToBottom();
 }
+
+const scrollToBottom = () => {
+  const messageContainer = document.getElementById(
+    "penpal-chatbot-widget-message-section"
+  );
+  if (messageContainer) {
+    messageContainer.scrollTop = messageContainer.scrollHeight;
+  }
+};
 
 async function handleMessageSend(input) {
   addChatMessage(false, input, generateUniqueID());
@@ -113,6 +123,8 @@ async function handleMessageSend(input) {
         // remove "..." after loading message from bot
         clearInterval(loadInterval);
         botDiv.innerHTML = `<span id="penpal-chatbot-widget-bot-response">${botResponse}</span>`;
+        // Scroll to the bottom of the chat message container
+        scrollToBottom();
       } catch {
         throw Error(body);
       }

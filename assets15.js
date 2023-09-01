@@ -160,7 +160,7 @@ export const style = () => {
         width: 10px;
       }
       body .penpal-chatbot-widget-container .penpal-chatbot-widget-card #penpal-chatbot-widget-message-section {
-        height: 80%;
+        height: 70%;
         padding: 0 2.5vw;
         overflow-y: auto;
         scrollbar-width: thin;
@@ -221,7 +221,7 @@ export const style = () => {
 
       /* For the type message section*/
       body .penpal-chatbot-widget-container .penpal-chatbot-widget-card #penpal-chatbot-widget-input-section {
-        z-index: 9999;
+        z-index: 0;
         padding: 0 2.5vw;
       
         display: flex;
@@ -322,10 +322,10 @@ export const style = () => {
         body .penpal-chatbot-widget-container .penpal-chatbot-widget-card #penpal-chatbot-widget-input-section {
           overflow: visible;
         }
-
+        
         body .penpal-chatbot-widget-container .penpal-chatbot-widget-card #penpal-chatbot-widget-input-section input {
           z-index: 99999;
-          color: #ffffff;
+          color: #00000;
           min-width: 0.5vw;
           outline: none;
           height: 5vw;
