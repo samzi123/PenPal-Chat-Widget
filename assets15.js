@@ -372,13 +372,13 @@ export const style = () => {
     min-width: 10px;
     max-height: 50px;
     min-height:10px;
-    display: block;
+    display: block;s
     margin: auto;
 }
 
 @media (max-width: 600px){
   body .tick-icon {
-    width: 8vw;
+    width: 8vw;s
     height: 7vw;
   }
 }
