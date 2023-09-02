@@ -325,7 +325,7 @@ export const style = () => {
         
         body .penpal-chatbot-widget-container .penpal-chatbot-widget-card #penpal-chatbot-widget-input-section input {
           z-index: 99999;
-          color: #00000;
+          color: ${primaryColorHexCode};
           min-width: 0.5vw;
           outline: none;
           height: 5vw;
@@ -372,13 +372,13 @@ export const style = () => {
     min-width: 10px;
     max-height: 50px;
     min-height:10px;
-    display: block;s
+    display: block;
     margin: auto;
 }
 
 @media (max-width: 600px){
   body .tick-icon {
-    width: 8vw;s
+    width: 8vw;
     height: 7vw;
   }
 }
