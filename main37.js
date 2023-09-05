@@ -1,9 +1,10 @@
-import { CLOSE_ICON, MESSAGE_ICON, TICK_ICON, style, setColorsFromThemeName } from "./assets18.js";
+import { CLOSE_ICON, MESSAGE_ICON, TICK_ICON, style, setColorsFromThemeName } from "./assets19.js";
 
 let loadInterval;
 var chatbotID = "";
 //const BASE_URL = "http://localhost:5001/dev/";
-const BASE_URL = "https://sswj8m0la3.execute-api.af-south-1.amazonaws.com/dev/";
+const BASE_URL = "https://ek7xi7s9tc.execute-api.af-south-1.amazonaws.com/production/";
+//const BASE_URL = "https://sswj8m0la3.execute-api.af-south-1.amazonaws.com/dev/";
 let messageWidget;
 var chatbotInfo = {};
 
