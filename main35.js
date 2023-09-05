@@ -1,4 +1,4 @@
-import { CLOSE_ICON, MESSAGE_ICON, TICK_ICON, style, setColorsFromThemeName } from "./assets16.js";
+import { CLOSE_ICON, MESSAGE_ICON, TICK_ICON, style, setColorsFromThemeName } from "./assets17.js";
 
 let loadInterval;
 var chatbotID = "";
@@ -82,6 +82,8 @@ function listenForMessageSend() {
   sendButton.addEventListener("click", function (e) {
     sendMessage();
   });
+
+  scrollToBottom();
 }
 
 async function handleMessageSend(input) {
@@ -108,7 +110,19 @@ async function handleMessageSend(input) {
     .catch((error) => {
       console.log("Error fetching chatbot info:", error);
     });
+
+  // Scroll to the bottom of the chat message container
+  scrollToBottom();
 }
+
+const scrollToBottom = () => {
+  const messageContainer = document.getElementById(
+    "penpal-chatbot-widget-message-section"
+  );
+  if (messageContainer) {
+    messageContainer.scrollTop = messageContainer.scrollHeight;
+  }
+};
 
 // returns bot's response to a particular user input (as promise)
 const getBotResponse = async (input) => {
