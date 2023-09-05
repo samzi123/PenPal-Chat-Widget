@@ -209,6 +209,7 @@ export const style = () => {
       body .penpal-chatbot-widget-container .penpal-chatbot-widget-card #penpal-chatbot-widget-message-section .penpal-chatbot-widget-message {
         color: ${primaryColorHexCode};
         clear: both;
+        border: 1.5px solid ${primaryColorHexCode};
         line-height: 1.2vw;
         font-size: 1vw;
         padding: 12px;

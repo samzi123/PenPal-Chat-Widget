@@ -1,4 +1,4 @@
-import { CLOSE_ICON, MESSAGE_ICON, TICK_ICON, style, setColorsFromThemeName } from "./assets17.js";
+import { CLOSE_ICON, MESSAGE_ICON, TICK_ICON, style, setColorsFromThemeName } from "./assets18.js";
 
 let loadInterval;
 var chatbotID = "";
@@ -185,7 +185,7 @@ const loader = (element) => {
 class MessageWidget {
   constructor(position = "bottom-right") {
     // TODO: remove before publishing
-    //window.setDataFromPage({id: "646330d6c251f7689abd9eb8"});
+    //window.setDataFromPage({id: "64e91363bdc85ca71626f200"});
 
     this.position = this.getPosition(position);
     this.open = false;
