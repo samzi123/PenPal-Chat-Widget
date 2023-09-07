@@ -45,6 +45,10 @@ const getChatbotInfo = async () => {
         try {
           const bodyJson = JSON.parse(body);
           chatbotInfo = bodyJson;
+
+          if (chatbotInfo?.status && chatbotInfo.status !== "active") {
+            return;
+          }
           document.getElementsByClassName("penpal-header")[0].innerHTML = chatbotInfo.chatTitle;
           document.getElementsByClassName("penpal-first-message")[0].innerHTML = chatbotInfo.welcomeMessage;
           setColorsFromThemeName(chatbotInfo.colorScheme);
@@ -186,7 +190,7 @@ const loader = (element) => {
 class MessageWidget {
   constructor(position = "bottom-right") {
     // TODO: remove before publishing
-    //window.setDataFromPage({id: "64e91363bdc85ca71626f200"});
+    window.setDataFromPage({id: "64e91363bdc85ca71626f200"});
 
     this.position = this.getPosition(position);
     this.open = false;
