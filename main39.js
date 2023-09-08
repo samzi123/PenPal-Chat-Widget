@@ -1,6 +1,6 @@
 import { CLOSE_ICON, MESSAGE_ICON, TICK_ICON, style, setColorsFromThemeName } from "./assets19.js";
 
-let loadInterval;
+//let loadInterval;
 var chatbotID = "";
 //const BASE_URL = "http://localhost:5001/dev/";
 const BASE_URL = "https://95qzvnunb8.execute-api.us-east-1.amazonaws.com/production/";
@@ -13,6 +13,20 @@ function sendMessage() {
   const input = inputField.value.trim();
   input != "" && chatbotID && handleMessageSend(input);
   inputField.value = "";
+}
+
+//formats text to have newlines (they somehow get removed in GPT's responses)
+function NewlineText(text) {
+  let newText = "";
+  const textSplit = text.split("\n");
+
+  for (let i = 0; i < textSplit.length; i++) {
+    if (textSplit[i] === undefined) continue;
+    newText += `<p>${textSplit[i]}</p>`;
+  }
+  newText = `<p>${newText}</p>`;
+
+  return newText;
 }
 
 // Function to receive and process data from the page
@@ -95,7 +109,7 @@ async function handleMessageSend(input) {
   addChatMessage(false, input, generateUniqueID());
 
   let botDiv = addChatMessage(true, "", generateUniqueID());
-  loader(botDiv);
+  const loadInterval = loader(botDiv);
   var scroll = document.getElementById("penpal-chatbot-widget-message-section");
   scroll.scrollTop = scroll.scrollHeight;
 
@@ -107,7 +121,7 @@ async function handleMessageSend(input) {
 
         // remove "..." after loading message from bot
         clearInterval(loadInterval);
-        botDiv.innerHTML = `<span id="penpal-chatbot-widget-bot-response">${botResponse}</span>`;
+        botDiv.innerHTML = `<span id="penpal-chatbot-widget-bot-response">${NewlineText(botResponse)}</span>`;
       } catch {
         throw Error(body);
       }
@@ -178,19 +192,21 @@ const generateUniqueID = () => {
 const loader = (element) => {
   element.textContent = ".";
 
-  loadInterval = setInterval(() => {
+  const loadInterval = setInterval(() => {
     element.textContent += ".";
 
     if (element.textContent.length > 3) {
       element.textContent = ".";
     }
   }, 300);
+
+  return loadInterval;
 };
 
 class MessageWidget {
   constructor(position = "bottom-right") {
     // TODO: remove before publishing
-    window.setDataFromPage({id: "64e91363bdc85ca71626f200"});
+    //window.setDataFromPage({id: "64e91363bdc85ca71626f200"});
 
     this.position = this.getPosition(position);
     this.open = false;
