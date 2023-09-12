@@ -80,10 +80,6 @@ const getChatbotInfo = async () => {
     });
 };
 
-// document.addEventListener("DOMContentLoaded", () => {
-//   listenForMessageSend();
-// });
-
 // adds event listeners on 'enter' key press and send button click
 function listenForMessageSend() {
   // listen for enter key press on input field

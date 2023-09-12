@@ -16,19 +16,39 @@ export const setChatBackgroundHexCode = (code) => {
 
 export const setColorsFromThemeName = (themeName) => {
   switch (themeName) {
-    case "dark":
-      setPrimaryColorHexCode("#00193b");
-      setSecondaryColorHexCode("#e0e0e0");
-      setChatBackgroundHexCode("#7b93b5");
+    case "orange":
+      setPrimaryColorHexCode("#eb520c");
+      setSecondaryColorHexCode("#fcf0e8");
+      setChatBackgroundHexCode("#ccc");
       break;
-    case "light":
-      setPrimaryColorHexCode("#301500");
+    case "green":
+      setPrimaryColorHexCode("#12b32a");
+      setSecondaryColorHexCode("#fff");
+      setChatBackgroundHexCode("#ccc");
+      break;
+    case "blue":
+      setPrimaryColorHexCode("#0066CC");
+      setSecondaryColorHexCode("#D9EBFF");
+      setChatBackgroundHexCode("#ccc");
+      break;
+    case "purple":
+      setPrimaryColorHexCode("#b41bde");
+      setSecondaryColorHexCode("#fff");
+      setChatBackgroundHexCode("#ccc");
+      break;
+    case "pink":
+      setPrimaryColorHexCode("#d6189d");
       setSecondaryColorHexCode("#fff");
       setChatBackgroundHexCode("#ccc");
       break;
     case "light-blue":
-      setPrimaryColorHexCode("#005475");
-      setSecondaryColorHexCode("#bfffef");
+      setPrimaryColorHexCode("#1ca8d6");
+      setSecondaryColorHexCode("#fff");
+      setChatBackgroundHexCode("#ccc");
+      break;
+    case "red":
+      setPrimaryColorHexCode("#cc0a1e");
+      setSecondaryColorHexCode("#fff");
       setChatBackgroundHexCode("#ccc");
       break;
     default:
