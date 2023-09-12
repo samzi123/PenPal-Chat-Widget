@@ -202,7 +202,7 @@ const loader = (element) => {
 class MessageWidget {
   constructor(position = "bottom-right") {
     // TODO: remove before publishing
-    //window.setDataFromPage({id: "64e91363bdc85ca71626f200"});
+    window.setDataFromPage({id: "64e91363bdc85ca71626f200"});
 
     this.position = this.getPosition(position);
     this.open = false;
@@ -306,7 +306,7 @@ class MessageWidget {
             <h1 class="penpal-header">${chatbotInfo.chatTitle || ""}</h1>
         </div>
         <div id="penpal-chatbot-widget-message-section">
-          <div class="penpal-chatbot-widget-message penpal-chatbot-widget-bot" id="penpal-chatbot-widget-bot"><span id="penpal-chatbot-widget-bot-response" class="penpal-first-message">Hello. I am listening! Go on..</span></div>
+          <div class="penpal-chatbot-widget-message penpal-chatbot-widget-bot" id="penpal-chatbot-widget-bot"><span id="penpal-chatbot-widget-bot-response" class="penpal-first-message">${chatbotInfo && chatbotInfo?.welcomeMessage}</span></div>
         </div>
         <div id="penpal-chatbot-widget-input-section">
           <input id="penpal-chatbot-widget-input" class="penpal-input-class" type="text" placeholder="Type a message" autocomplete="off" autofocus="autofocus"/>
