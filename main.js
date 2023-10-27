@@ -146,6 +146,7 @@ const getBotResponse = async (input) => {
     input: input,
     chatbotID: chatbotID,
     chatID: messageWidget.chatID,
+    sourceUrl: window.location.href,
   };    
 
   // generate bot response
@@ -202,19 +203,14 @@ const loader = (element) => {
 class MessageWidget {
   constructor(position = "bottom-right") {
     // TODO: remove before publishing
-    window.setDataFromPage({id: "64e91363bdc85ca71626f200"});
+    //window.setDataFromPage({id: "64e91363bdc85ca71626f200"});
 
     this.position = this.getPosition(position);
     this.open = false;
     this.chatID = generateUniqueID();
-
-   // if (chatbotID) {
     this.initialize();
     this.injectStyles();
     listenForMessageSend();
-    // } else {
-    //   console.log("No chatbot ID found.");
-    // }
   }
 
   position = "";
