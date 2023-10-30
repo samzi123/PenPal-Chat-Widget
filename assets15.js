@@ -402,11 +402,20 @@ export const style = () => {
 
 // we will not be able to change the color of any of these svg icons
 export const MESSAGE_ICON = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#FFFFFF"
-        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail">
-        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-        <polyline points="22,6 12,13 2,6"></polyline>
-    </svg>
+<canvas id="canvas" width="500" height="500"></canvas>
+
+<script src="https://unpkg.com/@rive-app/canvas@2.1.0"></script>
+<script>
+  const r = new rive.Rive({
+    src: "https://cdn.rive.app/animations/vehicles.riv",
+    canvas: document.getElementById("canvas"),
+    autoplay: true,
+    stateMachines: "bumpy",
+    onLoad: () => {
+      r.resizeDrawingSurfaceToCanvas();
+    },
+  });
+</script>
 `;
 
 export const CLOSE_ICON = `
