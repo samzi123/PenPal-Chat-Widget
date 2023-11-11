@@ -3,7 +3,8 @@ import { initializeRiveAnimation } from "./rive-animation.js"; // Import the Riv
 
 let loadInterval;
 var chatbotID = "";
-const BASE_URL = "https://sswj8m0la3.execute-api.af-south-1.amazonaws.com/dev/";
+//const BASE_URL = "https://sswj8m0la3.execute-api.af-south-1.amazonaws.com/dev/";
+const BASE_URL = "http://localhost:5100";
 let messageWidget;
 var chatbotInfo = {};
 

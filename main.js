@@ -1,9 +1,15 @@
-import { CLOSE_ICON, MESSAGE_ICON, TICK_ICON, style, setColorsFromThemeName } from "./assets.js";
+import {
+  CLOSE_ICON,
+  MESSAGE_ICON,
+  TICK_ICON,
+  style,
+  setColorsFromThemeName,
+} from "./assets.js";
 
 //let loadInterval;
 var chatbotID = "";
-//const BASE_URL = "http://localhost:5001/dev/";
-const BASE_URL = "https://95qzvnunb8.execute-api.us-east-1.amazonaws.com/production/";
+const BASE_URL = "http://localhost:5001/dev/";
+//const BASE_URL = "https://95qzvnunb8.execute-api.us-east-1.amazonaws.com/production/";
 //const BASE_URL = "https://d63iu0tya8.execute-api.us-east-1.amazonaws.com/dev/";
 let messageWidget;
 var chatbotInfo = {};
@@ -45,27 +51,30 @@ const getChatbotInfo = async () => {
   const url = BASE_URL + "chatbot/get_public_info";
   const requestInfo = {
     chatbotID: chatbotID,
-  };    
+  };
 
   // fetch chatbot info
   await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      },
-      body: JSON.stringify(requestInfo),
-    }).then(res => res.text())
-      .then(body => {
-        try {
-          const bodyJson = JSON.parse(body);
-          chatbotInfo = bodyJson;
+    },
+    body: JSON.stringify(requestInfo),
+  })
+    .then((res) => res.text())
+    .then((body) => {
+      try {
+        const bodyJson = JSON.parse(body);
+        chatbotInfo = bodyJson;
 
-          if (chatbotInfo?.status && chatbotInfo.status !== "active") {
-            return;
-          }
-          document.getElementsByClassName("penpal-header")[0].innerHTML = chatbotInfo.chatTitle;
-          document.getElementsByClassName("penpal-first-message")[0].innerHTML = chatbotInfo.welcomeMessage;
-          setColorsFromThemeName(chatbotInfo.colorScheme);
+        if (chatbotInfo?.status && chatbotInfo.status !== "active") {
+          return;
+        }
+        document.getElementsByClassName("penpal-header")[0].innerHTML =
+          chatbotInfo.chatTitle;
+        document.getElementsByClassName("penpal-first-message")[0].innerHTML =
+          chatbotInfo.welcomeMessage;
+        setColorsFromThemeName(chatbotInfo.colorScheme);
 
         // need to inject styles after setting colors
         messageWidget.injectStyles();
@@ -117,7 +126,9 @@ async function handleMessageSend(input) {
 
         // remove "..." after loading message from bot
         clearInterval(loadInterval);
-        botDiv.innerHTML = `<span id="penpal-chatbot-widget-bot-response">${NewlineText(botResponse)}</span>`;
+        botDiv.innerHTML = `<span id="penpal-chatbot-widget-bot-response">${NewlineText(
+          botResponse
+        )}</span>`;
       } catch {
         throw Error(body);
       }
@@ -147,7 +158,7 @@ const getBotResponse = async (input) => {
     chatbotID: chatbotID,
     chatID: messageWidget.chatID,
     sourceUrl: window.location.href,
-  };    
+  };
 
   // generate bot response
   return fetch(url, {
@@ -302,7 +313,9 @@ class MessageWidget {
             <h1 class="penpal-header">${chatbotInfo.chatTitle || ""}</h1>
         </div>
         <div id="penpal-chatbot-widget-message-section">
-          <div class="penpal-chatbot-widget-message penpal-chatbot-widget-bot" id="penpal-chatbot-widget-bot"><span id="penpal-chatbot-widget-bot-response" class="penpal-first-message">${chatbotInfo && chatbotInfo?.welcomeMessage}</span></div>
+          <div class="penpal-chatbot-widget-message penpal-chatbot-widget-bot" id="penpal-chatbot-widget-bot"><span id="penpal-chatbot-widget-bot-response" class="penpal-first-message">${
+            chatbotInfo && chatbotInfo?.welcomeMessage
+          }</span></div>
         </div>
         <div id="penpal-chatbot-widget-input-section">
           <input id="penpal-chatbot-widget-input" class="penpal-input-class" type="text" placeholder="Type a message" autocomplete="off" autofocus="autofocus"/>
