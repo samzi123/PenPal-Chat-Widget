@@ -58,23 +58,26 @@ const getChatbotInfo = async () => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-    },
-    body: JSON.stringify(requestInfo),
-  })
-    .then((res) => res.text())
-    .then((body) => {
-      try {
-        const bodyJson = JSON.parse(body);
-        chatbotInfo = bodyJson;
+      },
+      body: JSON.stringify(requestInfo),
+    }).then(res => res.text())
+      .then(body => {
+        try {
+          const chatbotInfo = JSON.parse(body);
 
-        if (chatbotInfo?.status && chatbotInfo.status !== "active") {
-          return;
-        }
-        document.getElementsByClassName("penpal-header")[0].innerHTML =
-          chatbotInfo.chatTitle;
-        document.getElementsByClassName("penpal-first-message")[0].innerHTML =
-          chatbotInfo.welcomeMessage;
-        setColorsFromThemeName(chatbotInfo.colorScheme);
+          if ((chatbotInfo?.status && chatbotInfo.status !== "active")) {
+            return;
+          }
+
+          // check chatbot message limits
+          if (chatbotInfo.messageLimit <= chatbotInfo.messageCount.count && new Date().getMonth() === chatbotInfo.messageCount.currentMonth) {
+            console.log("Message limit reached. Not showing chatbot.");
+            return;
+          }
+
+          document.getElementsByClassName("penpal-header")[0].innerHTML = chatbotInfo.chatTitle;
+          document.getElementsByClassName("penpal-first-message")[0].innerHTML = chatbotInfo.welcomeMessage;
+          setColorsFromThemeName(chatbotInfo.colorScheme);
 
         // need to inject styles after setting colors
         messageWidget.injectStyles();
