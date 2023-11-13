@@ -80,9 +80,10 @@ export const style = () => {
 
     .penpal-chatbot-widget-container .widget__container {
       width: 400px;
+      height: auto;
       overflow: auto;
-      right: -25px;
-      bottom: 75px;
+      right: 1%;
+      bottom: 1%;
       position: absolute;
       transition: max-height .2s ease;
       background-color: #ffffff;  /* Changed this line to full white */
@@ -93,9 +94,14 @@ export const style = () => {
     .penpal-chatbot-widget-container .widget__icon {
       cursor: pointer;
       width: 60%;
+      height: auto;
       position: absolute;
-      top: 18px;
-      left: 16px;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      justify-content: center;
+      border-radius: 50%;
+      
       transition: transform .3s ease;
     }
 
@@ -103,12 +109,26 @@ export const style = () => {
       transform: scale(0);
     }
     .penpal-chatbot-widget-container .button__container {
-      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 60px;
       height: 60px;
+      border: none;
       border-radius: 50%;
       cursor: pointer;
-      background-color: ${primaryColorHexCode};
+      background-color: transparent;
+      position: absolute;
+      bottom: 1%;
+      right: 1%;
+    }
+
+    .penpal-chatbot-widget-container .button__container .chat-icon,
+    .penpal-chatbot-widget-container .button__container .close-icon {
+      width: 80px;
+      height: auto;
+      border-radius: 50%;
+      object-fit: contain;
     }
 
     .penpal-chatbot-widget-container .widget__container.hidden {
@@ -423,21 +443,11 @@ export const style = () => {
 
 // we will not be able to change the color of any of these svg icons
 export const MESSAGE_ICON = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#FFFFFF"
-        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail">
-        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-        <polyline points="22,6 12,13 2,6"></polyline>
-    </svg>
+<img src ="/assets/chat-01.png" class="chat-icon"/>
 `;
-
 export const CLOSE_ICON = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="#FFFFFF" stroke="#FFFFFF"
-        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
-        <line x1="18" y1="6" x2="6" y2="18"></line>
-        <line x1="6" y1="6" x2="18" y2="18"></line>
-    </svg>
+<img src ="/assets/chat-02.png" class="close-icon"/>
 `;
-
 export const TICK_ICON = `
 <svg class="tick-icon" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <path d="M19.5 35.75C28.4746 35.75 35.75 28.4746 35.75 19.5C35.75 10.5254 28.4746 3.25 19.5 3.25C10.5254 3.25 3.25 10.5254 3.25 19.5C3.25 28.4746 10.5254 35.75 19.5 35.75Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
