@@ -57,7 +57,7 @@ const getChatbotInfo = async () => {
     }).then(res => res.text())
       .then(body => {
         try {
-          const chatbotInfo = JSON.parse(body);
+          chatbotInfo = JSON.parse(body);
 
           if ((chatbotInfo?.status && chatbotInfo.status !== "active")) {
             return;
