@@ -16,39 +16,19 @@ export const setChatBackgroundHexCode = (code) => {
 
 export const setColorsFromThemeName = (themeName) => {
   switch (themeName) {
-    case "orange":
-      setPrimaryColorHexCode("#eb520c");
-      setSecondaryColorHexCode("#fcf0e8");
-      setChatBackgroundHexCode("#ccc");
+    case "dark":
+      setPrimaryColorHexCode("#00193b");
+      setSecondaryColorHexCode("#e0e0e0");
+      setChatBackgroundHexCode("#7b93b5");
       break;
-    case "green":
-      setPrimaryColorHexCode("#12b32a");
-      setSecondaryColorHexCode("#fff");
-      setChatBackgroundHexCode("#ccc");
-      break;
-    case "blue":
-      setPrimaryColorHexCode("#0066CC");
-      setSecondaryColorHexCode("#D9EBFF");
-      setChatBackgroundHexCode("#ccc");
-      break;
-    case "purple":
-      setPrimaryColorHexCode("#b41bde");
-      setSecondaryColorHexCode("#fff");
-      setChatBackgroundHexCode("#ccc");
-      break;
-    case "pink":
-      setPrimaryColorHexCode("#d6189d");
+    case "light":
+      setPrimaryColorHexCode("#301500");
       setSecondaryColorHexCode("#fff");
       setChatBackgroundHexCode("#ccc");
       break;
     case "light-blue":
-      setPrimaryColorHexCode("#1ca8d6");
-      setSecondaryColorHexCode("#fff");
-      setChatBackgroundHexCode("#ccc");
-      break;
-    case "red":
-      setPrimaryColorHexCode("#cc0a1e");
-      setSecondaryColorHexCode("#fff");
+      setPrimaryColorHexCode("#005475");
+      setSecondaryColorHexCode("#bfffef");
       setChatBackgroundHexCode("#ccc");
       break;
     default:
@@ -80,10 +60,9 @@ export const style = () => {
 
     .penpal-chatbot-widget-container .widget__container {
       width: 400px;
-      height: auto;
       overflow: auto;
-      right: 1%;
-      bottom: 1%;
+      right: -25px;
+      bottom: 75px;
       position: absolute;
       transition: max-height .2s ease;
       background-color: #ffffff;  /* Changed this line to full white */
@@ -94,14 +73,9 @@ export const style = () => {
     .penpal-chatbot-widget-container .widget__icon {
       cursor: pointer;
       width: 60%;
-      height: auto;
       position: absolute;
-      align-items: center;
-      justify-content: center;
-      display: flex;
-      justify-content: center;
-      border-radius: 50%;
-      
+      top: 18px;
+      left: 16px;
       transition: transform .3s ease;
     }
 
@@ -109,26 +83,12 @@ export const style = () => {
       transform: scale(0);
     }
     .penpal-chatbot-widget-container .button__container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      border: none;
       width: 60px;
       height: 60px;
-      border: none;
       border-radius: 50%;
       cursor: pointer;
-      background-color: transparent;
-      position: absolute;
-      bottom: 1%;
-      right: 1%;
-    }
-
-    .penpal-chatbot-widget-container .button__container .chat-icon,
-    .penpal-chatbot-widget-container .button__container .close-icon {
-      width: 80px;
-      height: auto;
-      border-radius: 50%;
-      object-fit: contain;
+      background-color: ${primaryColorHexCode};
     }
 
     .penpal-chatbot-widget-container .widget__container.hidden {
@@ -249,7 +209,6 @@ export const style = () => {
       body .penpal-chatbot-widget-container .penpal-chatbot-widget-card #penpal-chatbot-widget-message-section .penpal-chatbot-widget-message {
         color: ${primaryColorHexCode};
         clear: both;
-        border: 1.5px solid ${primaryColorHexCode};
         line-height: 1.2vw;
         font-size: 1vw;
         padding: 12px;
@@ -443,11 +402,30 @@ export const style = () => {
 
 // we will not be able to change the color of any of these svg icons
 export const MESSAGE_ICON = `
-<img src ="/assets/chat-01.png" class="chat-icon"/>
+<canvas id="canvas" width="500" height="500"></canvas>
+
+<script src="https://unpkg.com/@rive-app/canvas@2.1.0"></script>
+<script>
+  const r = new rive.Rive({
+    src: "https://cdn.rive.app/animations/vehicles.riv",
+    canvas: document.getElementById("canvas"),
+    autoplay: true,
+    stateMachines: "bumpy",
+    onLoad: () => {
+      r.resizeDrawingSurfaceToCanvas();
+    },
+  });
+</script>
 `;
+
 export const CLOSE_ICON = `
-<img src ="/assets/chat-02.png" class="close-icon"/>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="#FFFFFF" stroke="#FFFFFF"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
 `;
+
 export const TICK_ICON = `
 <svg class="tick-icon" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <path d="M19.5 35.75C28.4746 35.75 35.75 28.4746 35.75 19.5C35.75 10.5254 28.4746 3.25 19.5 3.25C10.5254 3.25 3.25 10.5254 3.25 19.5C3.25 28.4746 10.5254 35.75 19.5 35.75Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
