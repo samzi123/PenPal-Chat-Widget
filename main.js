@@ -8,8 +8,8 @@ import {
 
 //let loadInterval;
 var chatbotID = "";
-const BASE_URL = "http://localhost:5001/dev/";
-//const BASE_URL = "https://95qzvnunb8.execute-api.us-east-1.amazonaws.com/production/";
+// const BASE_URL = "http://localhost:5001/dev/";
+const BASE_URL = "https://95qzvnunb8.execute-api.us-east-1.amazonaws.com/production/";
 //const BASE_URL = "https://d63iu0tya8.execute-api.us-east-1.amazonaws.com/dev/";
 let messageWidget;
 var chatbotInfo = {};
@@ -217,7 +217,7 @@ const loader = (element) => {
 class MessageWidget {
   constructor(position = "bottom-right") {
     // TODO: remove before publishing
-    //window.setDataFromPage({id: "64e91363bdc85ca71626f200"});
+    // window.setDataFromPage({id: "64e91363bdc85ca71626f200"});
 
     this.position = this.getPosition(position);
     this.open = false;
