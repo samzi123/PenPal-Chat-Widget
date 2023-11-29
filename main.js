@@ -217,7 +217,7 @@ const loader = (element) => {
 class MessageWidget {
   constructor(position = "bottom-right") {
     // TODO: remove before publishing
-    window.setDataFromPage({id: "64e91363bdc85ca71626f200"});
+    //  window.setDataFromPage({id: "64e91363bdc85ca71626f200"});
 
     this.position = this.getPosition(position);
     this.open = false;

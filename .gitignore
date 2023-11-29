@@ -23,7 +23,15 @@ dist-ssr
 *.sln
 *.sw?
 
+<<<<<<< HEAD
 main2.js
 mainWidget.js
 script.js
 app.js
+=======
+main.js
+main2.js
+mainWidget.js
+assets.js
+script.js
+>>>>>>> 366e3cc6efbeaee111a9f4b5601d8dfc411b37e4
